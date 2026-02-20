@@ -151,10 +151,9 @@ function solawi_grid_shortcode_render() {
             $args = array(
                 'post_type'      => 'solawi',
                 'posts_per_page' => -1,
-                'status'         => 'publish',
-                'orderby'        => 'rand' // Zufällige Reihenfolge
-                'orderby'        => 'title', // 'rand' ist sehr langsam, 'title' ist performanter
-                'order'          => 'ASC'
+                'post_status'    => 'publish',
+                // Zufällige Reihenfolge. Hinweis: Kann bei vielen Einträgen langsam sein.
+                'orderby'        => 'rand'
             );
             $query = new WP_Query( $args );
 
@@ -190,8 +189,7 @@ function solawi_ajax_filter_handler() {
         'post_type'      => 'solawi',
         'posts_per_page' => -1,
         'post_status'    => 'publish',
-        'orderby'        => 'rand',
-        'order'          => 'ASC'
+        'orderby'        => 'rand'
     );
 
     // FILTER 1: Produktsuche (Tax Query)
