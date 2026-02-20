@@ -190,8 +190,7 @@ function solawi_ajax_filter_handler() {
         'post_type'      => 'solawi',
         'posts_per_page' => -1,
         'post_status'    => 'publish',
-        'orderby'        => 'rand'
-        'orderby'        => 'title', // 'rand' ist sehr langsam, 'title' ist performanter
+        'orderby'        => 'rand',
         'order'          => 'ASC'
     );
 

@@ -1,5 +1,25 @@
+# Editor/Workspace-spezifische Dateien
 netz.code-workspace
+.vscode/
+
+# Lokale Entwicklungs-Assets (falls vorhanden)
 fonts/
 assets/
+
+# ACF Exporte (gut, dass diese schon drin sind)
 acf-export-2026-02-20.json
 acf-export-2026-02-20.zip
+
+# Log-Dateien
+*.log
+
+# Systemdateien
+.DS_Store
+Thumbs.db
+
+# Node/NPM Abhängigkeiten
+/node_modules/
+
+# Kompilierte CSS-Dateien (optional, aber gute Praxis)
+*.css
+*.css.map

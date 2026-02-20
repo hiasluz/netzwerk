@@ -24,7 +24,11 @@ function solawi_faq_schema_inject() {
     // Hole den gepufferten Content
     $content_html = ob_get_contents();
     
-    if (empty($content_html)) return;
+    // Performance-Check: Nur fortfahren, wenn ein Accordion/Toggle im HTML gefunden wird.
+    // Das verhindert unnötiges Parsen auf Seiten ohne FAQs.
+    if (empty($content_html) || strpos($content_html, 'et_pb_toggle') === false) {
+        return;
+    }
     
     // Schema-Datenstruktur vorbereiten
     $schema_data = array(
@@ -87,4 +91,3 @@ function solawi_faq_schema_inject() {
     }
 }
 add_action('wp_footer', 'solawi_faq_schema_inject', 999);
-

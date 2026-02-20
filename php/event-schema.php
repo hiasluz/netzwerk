@@ -4,11 +4,14 @@
  * Features: Offline/Online, SubEvents, Organizer, Kosten
  */
 function add_dynamic_event_schema_json() {
-    if ( ! is_page( 15 ) ) { return; } // Nur auf der Event-Seite
-    // Prüfe auf eine bestimmte Seite. Die Verwendung des "Slugs" (der Teil in der URL)
-    // ist robuster als eine feste ID. Passe 'veranstaltungen' ggf. an.
-    $event_page_slug = 'veranstaltungen'; 
-    if ( ! is_page( $event_page_slug ) ) { return; }
+ 
+    // Dieses Skript generiert eine Liste aller Events für Suchmaschinen.
+    // Es soll nur auf der Haupt-Übersichtsseite für Veranstaltungen laufen.
+    // Wir prüfen daher, ob es die manuelle Seite 'veranstaltungen' ODER die
+    // automatische Archiv-Seite des Post-Types 'veranstaltung' ist.
+    if ( ! is_page('veranstaltungen') && ! is_post_type_archive('veranstaltung') ) {
+        return;
+    }
 
     $args = array(
         'post_type'      => 'veranstaltung',
