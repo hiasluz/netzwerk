@@ -26,7 +26,7 @@ Dieses Repository enthält das Child-Theme für die Webseite des Ernährungsnetz
 3.  Lade den entpackten Ordner `netz` (oder wie auch immer du ihn nennst) in das Verzeichnis `/wp-content/themes/` deiner WordPress-Installation hoch.
 4.  Gehe im WordPress-Backend zu `Design` > `Themes` und aktiviere das Child-Theme "ernaehrungfreiburg".
 
-## 🛠️ Konfiguration & Abhängigkeiten
+## Konfiguration & Abhängigkeiten
 
 Damit alle Funktionen korrekt arbeiten, sind einige Konfigurationen notwendig.
 
