@@ -41,6 +41,22 @@ document.addEventListener('DOMContentLoaded', function() {
         maxZoom: 16
     }).setView(mapCenter, 11);
 
+    // 1. Standardmäßig das Mausrad deaktivieren
+    map.scrollWheelZoom.disable();
+
+    // 2. Wenn auf die Karte geklickt wird -> Mausrad aktivieren
+    map.on('click', function() {
+        if (map.scrollWheelZoom.enabled()) {
+            return;
+        }
+        map.scrollWheelZoom.enable();
+    });
+
+    // 3. Wenn die Maus die Karte verlässt -> Mausrad wieder deaktivieren
+    map.on('mouseout', function() {
+        map.scrollWheelZoom.disable();
+    });
+
     // Load Local Tiles
     const tileUrl = solawiMapData.tileUrl || 'assets/tiles/{z}/{x}/{y}.png';
     L.tileLayer(tileUrl, {
@@ -52,8 +68,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Optional: Set bounds to prevent panning outside the tile area
     // Based on Freiburg region
-    const southWest = L.latLng(47.7, 7.5);
-    const northEast = L.latLng(48.3, 8.2);
+    // Based on Freiburg region - widened to allow more panning
+    const southWest = L.latLng(47.5, 7.0);
+    const northEast = L.latLng(48.5, 9.0);
     const bounds = L.latLngBounds(southWest, northEast);
     map.setMaxBounds(bounds);
     map.on('drag', function() {
@@ -136,8 +153,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Actually, let's filter based on location data since markers array aligns with locations array
         const relevantMarkers = markers.filter((m, i) => {
-            // String comparison just to be safe
-            return String(locations[i].id) !== '148';
+            const locId = String(locations[i].id);
+            // Ausreißer ignorieren für den initialen Zoom (z.B. weit entfernte Standorte)
+            return locId !== '148' && locId !== '448';
         });
 
         if (relevantMarkers.length > 0) {

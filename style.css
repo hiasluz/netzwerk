@@ -99,7 +99,7 @@ a {
   outline-offset: 2px;
 }
 
-.solawi-profile-card .stat-item::before, .single-depot-item .depot-info::before, .single-depot-item .depot-map-link::before, .single-depot-item .depot-time::before, .solawi-cat-brot::before, .solawi-cat-gemuese::before, .solawi-cat-getreide::before, .solawi-cat-getraenke::before, .solawi-cat-milchprodukte::before, .solawi-cat-fleisch::before, .solawi-cat-eingemacht::before, .solawi-cat-obst::before, .solawi-cat-mehl::before {
+.solawi-profile-card .stat-item::before, .single-depot-item .depot-info::before, .single-depot-item .depot-map-link::before, .single-depot-item .depot-time::before, .solawi-cat-europa::before, .solawi-cat-olivenoel::before, .solawi-cat-naturkost::before, .solawi-cat-biokiste::before, .solawi-cat-bioladen::before, .solawi-cat-kombucha::before, .solawi-cat-brot::before, .solawi-cat-gemuese::before, .solawi-cat-getreide::before, .solawi-cat-getraenke::before, .solawi-cat-milchprodukte::before, .solawi-cat-fleisch::before, .solawi-cat-eingemacht::before, .solawi-cat-obst::before, .solawi-cat-mehl::before {
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
@@ -161,6 +161,36 @@ a {
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M128 496L128 320C92.7 320 64 291.3 64 256C64 39.5 576 39.5 576 256C576 291.3 547.3 320 512 320L512 496C512 522.5 490.5 544 464 544L176 544C149.5 544 128 522.5 128 496z'/%3E%3C/svg%3E");
 }
 
+.solawi-cat-kombucha::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M496 192h-32v-64c0-35.3-28.7-64-64-64H240c-35.3 0-64 28.7-64 64v64h-32c-35.3 0-64 28.7-64 64v256c0 35.3 28.7 64 64 64h352c35.3 0 64-28.7 64-64V256c0-35.3-28.7-64-64-64zM224 128h192v64H224v-64zm272 384H144V256h352v256zm-176-64c44.2 0 80-35.8 80-80s-35.8-80-80-80-80 35.8-80 80 35.8 80 80 80z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M496 192h-32v-64c0-35.3-28.7-64-64-64H240c-35.3 0-64 28.7-64 64v64h-32c-35.3 0-64 28.7-64 64v256c0 35.3 28.7 64 64 64h352c35.3 0 64-28.7 64-64V256c0-35.3-28.7-64-64-64zM224 128h192v64H224v-64zm272 384H144V256h352v256zm-176-64c44.2 0 80-35.8 80-80s-35.8-80-80-80-80 35.8-80 80 35.8 80 80 80z'/%3E%3C/svg%3E");
+}
+
+.solawi-cat-bioladen::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M608 160H32l32 112h32v272h448V272h32l32-112zM320 96c44.2 0 80 35.8 80 80H240c0-44.2 35.8-80 80-80zM224 544V352h192v192H224z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M608 160H32l32 112h32v272h448V272h32l32-112zM320 96c44.2 0 80 35.8 80 80H240c0-44.2 35.8-80 80-80zM224 544V352h192v192H224z'/%3E%3C/svg%3E");
+}
+
+.solawi-cat-biokiste::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M320 64c-56.4 0-96 71.6-96 160h192c0-88.4-39.6-160-96-160zM64 288l32 256h448l32-256H64z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M320 64c-56.4 0-96 71.6-96 160h192c0-88.4-39.6-160-96-160zM64 288l32 256h448l32-256H64z'/%3E%3C/svg%3E");
+}
+
+.solawi-cat-naturkost::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M320 32L224 160l96 96 96-96L320 32zm-128 192l-96 96 96 96 96-96-96-96zm256 0l-96 96 96 96 96-96-96-96zM304 448h32v160h-32V448z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M320 32L224 160l96 96 96-96L320 32zm-128 192l-96 96 96 96 96-96-96-96zm256 0l-96 96 96 96 96-96-96-96zM304 448h32v160h-32V448z'/%3E%3C/svg%3E");
+}
+
+.solawi-cat-olivenoel::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M448 192h-64V96h32V32H224v64h32v96h-64c-35.3 0-64 28.7-64 64v256c0 35.3 28.7 64 64 64h256c35.3 0 64-28.7 64-64V256c0-35.3-28.7-64-64-64zM320 480c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M448 192h-64V96h32V32H224v64h32v96h-64c-35.3 0-64 28.7-64 64v256c0 35.3 28.7 64 64 64h256c35.3 0 64-28.7 64-64V256c0-35.3-28.7-64-64-64zM320 480c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48z'/%3E%3C/svg%3E");
+}
+
+.solawi-cat-europa::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M320 64c-106 0-192 86-192 192 0 128 192 320 192 320s192-192 192-320c0-106-86-192-192-192zm0 128l29 90h95l-77 56 29 90-77-56-77 56 29-90-77-56h95l29-90z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M320 64c-106 0-192 86-192 192 0 128 192 320 192 320s192-192 192-320c0-106-86-192-192-192zm0 128l29 90h95l-77 56 29 90-77-56-77 56 29-90-77-56h95l29-90z'/%3E%3C/svg%3E");
+}
+
 body {
   font-family: "Inter", sans-serif;
 }
@@ -206,6 +236,12 @@ a {
   text-decoration: none;
 }
 
+#page-container header.et-l--header .et_pb_group_0_tb_header {
+  flex: 0 !important;
+}
+#page-container header.et-l--header .et_pb_menu_inner_container {
+  margin-left: auto !important;
+}
 #page-container header.et-l--header .et_pb_module.gross {
   display: block !important;
   opacity: 1;
@@ -523,8 +559,6 @@ a {
   transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
   display: flex;
   flex-direction: column;
-  /* Modifikatoren für die Kacheln: Überschreiben nur die Variable */
-  /* Status Badge Styling */
 }
 .solawi-card:hover {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
@@ -575,8 +609,8 @@ a {
   margin-bottom: 15px;
   color: #2D2D2D;
   display: -webkit-box;
-  line-clamp: 4;
-  -webkit-line-clamp: 4;
+  line-clamp: 5;
+  -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
   align-content: end;
@@ -593,6 +627,9 @@ a {
   border-radius: 8px;
   text-align: center;
 }
+.solawi-card {
+  /* Modifikatoren für die Kacheln: Überschreiben nur die Variable */
+}
 .solawi-card.status-offen {
   --solawi-color: #2c6e49;
 }
@@ -607,6 +644,9 @@ a {
 }
 .solawi-card.status-kiste {
   --solawi-color: #fb8500;
+}
+.solawi-card {
+  /* Status Badge Styling */
 }
 .solawi-card .solawi-status-badge {
   position: absolute;
@@ -724,7 +764,6 @@ a {
   font-size: 0.95rem;
   color: #2D2D2D;
   margin-bottom: 15px;
-  flex-grow: 1;
   display: -webkit-box;
   line-clamp: 10;
   -webkit-line-clamp: 10;
@@ -734,6 +773,12 @@ a {
 .solawi-event-card .solawi-event-excerpt p {
   margin-bottom: 0;
 }
+.solawi-event-card .solawi-event-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+}
 .solawi-event-card .solawi-btn-small {
   display: inline-block;
   padding: 8px 16px;
@@ -741,12 +786,24 @@ a {
   color: #F4F1EA !important;
   text-decoration: none;
   border-radius: 8px;
-  align-self: flex-start;
-  transition: background 0.3s;
-  margin-top: auto;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
 }
 .solawi-event-card .solawi-btn-small:hover {
   background-color: rgb(49.0363636364, 90.4636363636, 59.1818181818);
+  transform: translateY(-1px);
+}
+.solawi-event-card .solawi-btn-small.solawi-btn-secondary {
+  background-color: transparent;
+  color: #3A6B46 !important;
+  border: 2px solid #3A6B46;
+  padding: 6px 14px;
+}
+.solawi-event-card .solawi-btn-small.solawi-btn-secondary:hover {
+  background-color: rgba(58, 107, 70, 0.05);
+  border-color: rgb(40.0727272727, 73.9272727273, 48.3636363636);
+  color: rgb(40.0727272727, 73.9272727273, 48.3636363636) !important;
 }
 
 /* --- Solawi Depot List (Single Page) --- */
@@ -813,6 +870,9 @@ a {
   border-top: 1px solid #f5f5f5;
   padding-top: 10px;
   margin-top: auto;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  word-wrap: break-word;
   display: flex;
   align-items: flex-start;
 }
@@ -822,6 +882,16 @@ a {
   flex-shrink: 0;
   margin-top: 2px;
   background-color: #2D2D2D;
+}
+.single-depot-item .depot-info .depot-info-line {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+.single-depot-item .depot-info .depot-info-line:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 /* --- Solawi Profile Card (Quartet) --- */
@@ -942,4 +1012,126 @@ a {
 .solawi-profile-card .stat-item.stat-web::before {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M128 96C92.7 96 64 124.7 64 160L64 416C64 451.3 92.7 480 128 480L272 480L256 528L184 528C170.7 528 160 538.7 160 552C160 565.3 170.7 576 184 576L456 576C469.3 576 480 565.3 480 552C480 538.7 469.3 528 456 528L384 528L368 480L512 480C547.3 480 576 451.3 576 416L576 160C576 124.7 547.3 96 512 96L128 96zM160 160L480 160C497.7 160 512 174.3 512 192L512 352C512 369.7 497.7 384 480 384L160 384C142.3 384 128 369.7 128 352L128 192C128 174.3 142.3 160 160 160z'/%3E%3C/svg%3E");
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M128 96C92.7 96 64 124.7 64 160L64 416C64 451.3 92.7 480 128 480L272 480L256 528L184 528C170.7 528 160 538.7 160 552C160 565.3 170.7 576 184 576L456 576C469.3 576 480 565.3 480 552C480 538.7 469.3 528 456 528L384 528L368 480L512 480C547.3 480 576 451.3 576 416L576 160C576 124.7 547.3 96 512 96L128 96zM160 160L480 160C497.7 160 512 174.3 512 192L512 352C512 369.7 497.7 384 480 384L160 384C142.3 384 128 369.7 128 352L128 192C128 174.3 142.3 160 160 160z'/%3E%3C/svg%3E");
+}
+
+/* --- Slider Container --- */
+.solawi-slider-container {
+  max-width: 100%;
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  /* Hide the images by default */
+}
+.solawi-slider-container .solawi-slide {
+  display: none;
+  animation-name: fade;
+  animation-duration: 1.5s;
+  /* Show the active image */
+}
+.solawi-slider-container .solawi-slide.active {
+  display: block;
+}
+.solawi-slider-container .solawi-slide {
+  /* Make images responsive */
+}
+.solawi-slider-container .solawi-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
+  max-height: 600px;
+  border-radius: 8px;
+}
+.solawi-slider-container {
+  /* Next & previous buttons */
+}
+.solawi-slider-container .solawi-slider-prev,
+.solawi-slider-container .solawi-slider-next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 10px;
+  color: #F4F1EA;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  transform: translateY(-50%);
+  border-radius: 0 3px 3px 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Arrow Icon */
+}
+.solawi-slider-container .solawi-slider-prev::after,
+.solawi-slider-container .solawi-slider-next::after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-top: 3px solid currentColor;
+  border-right: 3px solid currentColor;
+  display: block;
+}
+.solawi-slider-container .solawi-slider-prev:hover,
+.solawi-slider-container .solawi-slider-next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.solawi-slider-container {
+  /* Specific Adjustments */
+}
+.solawi-slider-container .solawi-slider-prev {
+  left: 0;
+}
+.solawi-slider-container .solawi-slider-prev::after {
+  transform: rotate(-135deg);
+  margin-left: 4px;
+}
+.solawi-slider-container .solawi-slider-next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+.solawi-slider-container .solawi-slider-next::after {
+  transform: rotate(45deg);
+  margin-right: 4px;
+}
+.solawi-slider-container {
+  /* Caption text (optional) */
+}
+.solawi-slider-container .text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+.solawi-slider-container {
+  /* Number text (1/3 etc) */
+}
+.solawi-slider-container .numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Fading animation */
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
 }/*# sourceMappingURL=style.css.map */

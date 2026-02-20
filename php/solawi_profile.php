@@ -46,7 +46,14 @@ function solawi_profile_card_shortcode_render() {
                 <div class="stat-label">Mitglieder</div>
                 <div class="stat-value">
                     <?php 
-                        if($m_aktuell && $m_max) echo esc_html($m_aktuell) . ' <span class="sep">/</span> ' . esc_html($m_max);
+                        if ($m_max == '-1') {
+                            if($m_aktuell) {
+                                echo esc_html($m_aktuell) . ' <span class="sep">/</span> unbegrenzt';
+                            } else {
+                                echo 'unbegrenzt';
+                            }
+                        }
+                        elseif($m_aktuell && $m_max) echo esc_html($m_aktuell) . ' <span class="sep">/</span> ' . esc_html($m_max);
                         elseif($m_aktuell) echo esc_html($m_aktuell);
                         elseif($m_max) echo esc_html($m_max) . ' (Max)';
                     ?>

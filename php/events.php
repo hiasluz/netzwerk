@@ -12,7 +12,7 @@ function solawi_events_shortcode_render( $atts ) {
     // Query args
     $args = array(
         'post_type'      => 'veranstaltung',
-        'posts_per_page' => 3, 
+        'posts_per_page' => -1,
         'meta_key'       => 'event_date',
         'orderby'        => 'meta_value_num',
         'order'          => 'ASC',
@@ -53,6 +53,11 @@ function solawi_events_shortcode_render( $atts ) {
                     $event_start_2 = get_field('event_start_2');
                     $event_end_2   = get_field('event_end_2');
 
+                    // --- Tag 3 Felder (NEU) ---
+                    $date_raw_3    = get_field('event_date_3', $post_id, false);
+                    $event_start_3 = get_field('event_start_3');
+                    $event_end_3   = get_field('event_end_3');
+
                     // --- Location & Bild ---
                     $strasse = get_field('strasse');
                     $plz     = get_field('plz');
@@ -72,6 +77,13 @@ function solawi_events_shortcode_render( $atts ) {
                     if ($date_raw_2) {
                         $date_obj_2 = DateTime::createFromFormat('Ymd', $date_raw_2);
                         if (!$date_obj_2) { $date_obj_2 = new DateTime($date_raw_2); }
+                    }
+
+                    // Datumsformatierung Tag 3 (für die Anzeige unten)
+                    $date_obj_3 = false;
+                    if ($date_raw_3) {
+                        $date_obj_3 = DateTime::createFromFormat('Ymd', $date_raw_3);
+                        if (!$date_obj_3) { $date_obj_3 = new DateTime($date_raw_3); }
                     }
 
                     if(!$img_url) {
@@ -115,6 +127,19 @@ function solawi_events_shortcode_render( $atts ) {
                                     </span>
                                 <?php endif; ?>
 
+                                <?php if($date_obj_3 && $event_start_3): 
+                                     $day_3_label = date_i18n('D, d.m.', $date_obj_3->getTimestamp()); 
+                                     $time_3 = $format_time($event_start_3);
+                                     if ($event_end_3) {
+                                         $time_3 .= ' - ' . $format_time($event_end_3);
+                                     }
+                                ?>
+                                    <span class="meta-item" style="color: #666; font-size: 0.9em; display:block; margin-top:4px;">
+                                        <i class="dashicons dashicons-calendar-alt"></i> 
+                                        + <?php echo esc_html($day_3_label); ?>: <?php echo esc_html($time_3); ?> Uhr
+                                    </span>
+                                <?php endif; ?>
+
                                 <?php 
                                     $modus = get_field('event_modus', $post_id); 
                                 ?>
@@ -134,9 +159,13 @@ function solawi_events_shortcode_render( $atts ) {
                             <div class="solawi-event-excerpt">
                                 <?php the_excerpt(); ?>
                             </div>
-                            <?php if($link): ?>
-                                <a href="<?php echo esc_url($link); ?>" class="solawi-btn-small" target="_blank">Mehr Infos &rarr;</a>
-                            <?php endif; ?>
+                            <div class="solawi-event-buttons">
+                                <a href="<?php the_permalink(); ?>" class="solawi-btn-small">Mehr Infos &rarr;</a>
+                                
+                                <?php if($link): ?>
+                                    <a href="<?php echo esc_url($link); ?>" class="solawi-btn-small solawi-btn-secondary" target="_blank" rel="noopener">Zum Veranstalter</a>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </article>
                 <?php endwhile; ?>
@@ -171,6 +200,11 @@ function solawi_event_meta_shortcode_render() {
     $date_raw_2    = get_field('event_date_2', $post_id, false);
     $event_start_2 = get_field('event_start_2', $post_id);
     $event_end_2   = get_field('event_end_2', $post_id);
+
+    // Tag 3
+    $date_raw_3    = get_field('event_date_3', $post_id, false);
+    $event_start_3 = get_field('event_start_3', $post_id);
+    $event_end_3   = get_field('event_end_3', $post_id);
     
     // Ort
     $strasse = get_field('strasse', $post_id);
@@ -210,6 +244,21 @@ function solawi_event_meta_shortcode_render() {
         $string_day_2 .= ' Uhr';
     }
 
+    // --- AUFBAU STRING TAG 3 ---
+    $string_day_3 = '';
+    if ($date_raw_3 && $event_start_3) {
+        $date_obj_3 = DateTime::createFromFormat('Ymd', $date_raw_3);
+        
+        $string_day_3 .= ' & '; // Trenner
+        $string_day_3 .= $date_obj_3 ? $date_obj_3->format('d.m.') : ''; 
+        $string_day_3 .= ' ' . $format_time($event_start_3);
+        
+        if ($event_end_3) {
+            $string_day_3 .= '-' . $format_time($event_end_3);
+        }
+        $string_day_3 .= ' Uhr';
+    }
+
     // --- ORT ---
     $modus = get_field('event_modus', $post_id);
     $location_display = '';
@@ -223,14 +272,21 @@ function solawi_event_meta_shortcode_render() {
         }
     }
 
-    // Alles zusammenbauen
-    // Beispiel Ergebnis: "24.01.2026, 19-21 Uhr & 25.01. 09-12 Uhr, Freiburg"
-    $full_date_string = $string_day_1 . $string_day_2;
+    // Build output with icons
+    $html = '<div class="solawi-event-meta">';
     
-    $parts = array_filter([$full_date_string, $location_display]);
-    
-    if (empty($parts)) return '';
+    $full_date_string = $string_day_1 . $string_day_2 . $string_day_3;
 
-    return '<div class="solawi-event-single-meta">' . implode(', ', $parts) . '</div>';
+    if ($full_date_string) {
+        $html .= '<span class="meta-item"><i class="dashicons dashicons-calendar-alt"></i> ' . esc_html($full_date_string) . '</span>';
+    }
+    
+    if ($location_display) {
+        $html .= '<span class="meta-item"><i class="dashicons dashicons-location"></i> ' . esc_html($location_display) . '</span>';
+    }
+    
+    $html .= '</div>';
+
+    return $html;
 }
 add_shortcode('solawi_event_meta', 'solawi_event_meta_shortcode_render');

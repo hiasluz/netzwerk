@@ -19,6 +19,9 @@ function ernaehrung_enqueue_assets() {
 		wp_get_theme()->get( 'Version' )
 	);
 
+	// Enqueue Dashicons
+	wp_enqueue_style( 'dashicons' );
+
 	// Enqueue Custom Scripts
 	wp_enqueue_script(
 		'ernaehrung-header-scroll', // Einzigartiger Name (Handle) für das Skript
@@ -304,7 +307,14 @@ function solawi_single_depots_list_render() {
         $output .= '<a href="#solawi-map" class="solawi-map-focus-trigger depot-map-link" data-depot-id="' . esc_attr($depot_id) . '" aria-label="Depot ' . esc_attr($title) . ' auf Karte zeigen">Auf Karte zeigen</a>';
         
         if($info) {
-             $output .= '<div class="depot-info">' . esc_html($info) . '</div>';
+             $lines = preg_split('/\r\n|\r|\n/', trim($info));
+             $lines_html = '';
+             foreach($lines as $line) {
+                 $line = trim($line);
+                 if($line === '') continue;
+                 $lines_html .= '<div class="depot-info-line">' . make_clickable(esc_html($line)) . '</div>';
+             }
+             $output .= '<div class="depot-info"><span>' . $lines_html . '</span></div>';
         }
         $output .= '</div>';
     }
