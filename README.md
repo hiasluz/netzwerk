@@ -57,12 +57,17 @@ Ein Großteil der Daten wird über ACF-Felder verwaltet. Stelle sicher, dass das
 
 #### Feldgruppe: "Veranstaltungsdetails" (zugewiesen an CPT `veranstaltung`)
 
-- `event_date` / `event_date_2`: Datum (Date Picker), Rückgabeformat: `Ymd`
-- `event_start` / `event_end` / `event_start_2` / `event_end_2`: Zeit (Time Picker)
+- `event_date` / `event_date_2` / `event_date_3`: Datum (Date Picker), Rückgabeformat: `Ymd`
+- `event_start` / `event_end` / `event_start_2` / `event_end_2` / `event_start_3` / `event_end_3`: Zeit (Time Picker)
 - `event_modus`: Auswahl (Select), Werte: `offline`, `online`
 - `event_online_link`: URL
 - `strasse`, `plz`, `stadt`: Text
 - `event_organizer`, `kosten`: Text
+
+#### Feldgruppe: "Slider-Galerie" (zugewiesen an beliebige Post-Types, z.B. `page` oder `post`)
+
+- `slider_gruppe`: Gruppe (Group). Innerhalb dieser Gruppe können beliebig viele Bild-Felder (Image) angelegt werden. Die Namen der inneren Felder sind nicht relevant.
+  - Rückgabewert für die Bild-Felder: Bild-Array (Image Array).
 
 ## Shortcodes
 
@@ -91,6 +96,10 @@ Das Theme stellt mehrere Shortcodes zur Verfügung, die im Divi Builder oder and
 - `[solawi_single_depots_list]`
   - **Funktion:** Zeigt eine Liste der Depots, die von einer bestimmten Solawi beliefert werden.
   - **Einsatzort:** Nur auf der Template-Seite für einzelne Solawis (`solawi`).
+
+- `[solawi_slider]`
+  - **Funktion:** Zeigt eine Bilder-Galerie als Slider an. Die Bilder werden aus der ACF-Feldgruppe `slider_gruppe` des jeweiligen Beitrags/Seite geladen.
+  - **Einsatzort:** Beliebige Seiten oder Beiträge, auf denen die Feldgruppe "Slider-Galerie" aktiv ist.
 
 ## Entwicklung
 
