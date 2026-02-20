@@ -1,0 +1,1171 @@
+/**
+ * Theme Name:     ernaehrungfreiburg
+ * Author:         NetzFr
+ * Template:       Divi
+ * Text Domain:	   ernaehrungfreiburg
+ * Description:    Divi5 Child Theme
+ * Version:        0.0
+ */
+
+@use 'sass:map';
+
+/* --- Font-Face: Inter --- */
+$inter-fonts: (
+  'regular': (style: normal,
+    weight: 400),
+  'italic': (style: italic,
+    weight: 400),
+  '500': (style: normal,
+    weight: 500),
+  '700': (style: normal,
+    weight: 700)
+);
+
+@each $name, $font in $inter-fonts {
+  @font-face {
+    font-display: swap;
+    font-family: 'Inter';
+    font-style: map.get($font, style);
+    font-weight: map.get($font, weight);
+    src: url('fonts/inter-v20-latin-#{$name}.woff2') format('woff2');
+  }
+}
+
+/* --- SCSS Variables --- */
+
+// Hauptfarben
+$primary: #3A6B46;
+$secondary: #5D4037;
+
+// Textfarben
+$heading: #2D2D2D;
+$text: #2D2D2D;
+
+// Akzente & Weitere
+$accent: #D99E32;
+$soft: #A4C686;
+$white: #F4F1EA;
+
+
+// Status Farben
+$status-offen: #2c6e49;
+$status-offen-bg: #eefbf0;
+$status-warteliste: #e09f3e;
+$status-warteliste-bg: #fff8ed;
+$status-voll: #bc4749;
+$status-voll-bg: #fdf2f2;
+$status-laden: #3a86ff;
+$status-laden-bg: #e7f0ff;
+$status-kiste: #fb8500;
+$status-kiste-bg: #fff5e6;
+
+// Pin Icons
+$hof-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M544 240L320 64 96 240V512H256V352H384V512H544V240Z'/%3E%3C/svg%3E");
+$laden-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M512 128H128V96H512V128ZM544 160V192H96V160H544ZM512 224V512H128V224H512ZM352 288H288V352H352V288Z'/%3E%3C/svg%3E");
+$kiste-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M64 128V512H576V128H64ZM512 448H128V192H512V448ZM448 256H192V320H448V256Z'/%3E%3C/svg%3E");
+
+// Icons (SVG Data URIs)
+$brot: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M128 496L128 320C92.7 320 64 291.3 64 256C64 39.5 576 39.5 576 256C576 291.3 547.3 320 512 320L512 496C512 522.5 490.5 544 464 544L176 544C149.5 544 128 522.5 128 496z'/%3E%3C/svg%3E");
+$gemuese: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M453.1 27.3L440.9 39.4C409.7 70.6 409.7 121.3 440.9 152.5C456.5 168.1 472.1 183.7 487.8 199.4C519 230.6 569.7 230.6 600.9 199.4L613 187.3C619.2 181.1 619.2 170.9 613 164.7L600.9 152.6C569.7 121.4 519 121.4 487.8 152.6C519 121.4 519 70.7 487.8 39.5L475.7 27.3C469.5 21.1 459.3 21.1 453.1 27.3zM331.6 160C286.4 160 244.5 180.4 216.6 214.3L273.3 271C282.7 280.4 282.7 295.6 273.3 304.9C263.9 314.2 248.7 314.3 239.4 304.9L191.6 257.2L67.2 530.8C61.7 542.9 64.3 557.2 73.7 566.7C83.1 576.2 97.4 578.7 109.6 573.2L251.2 508.8L207.4 465C198 455.6 198 440.4 207.4 431.1C216.8 421.8 232 421.7 241.3 431.1L297.8 487.6L393.1 444.3C446.2 420.2 480.3 367.2 480.3 308.8C480.3 226.6 413.7 160 331.5 160z'/%3E%3C/svg%3E");
+$getreide: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M111.7 298.6C117.9 294.5 126.4 295.2 131.8 300.7L177.9 346.8L184 353.5C203.7 377.3 210.3 408.5 203.2 437.4C234.9 429.7 269.4 438.4 293.8 462.7L339.9 508.8C346.1 515 346.1 525.2 339.9 531.4L332.5 538.8C295 576.3 234.2 576.3 196.7 538.8L166.1 508.3L81.4 593C72 602.4 56.9 602.4 47.5 593C38.1 583.6 38.1 568.4 47.5 559.1L132.2 474.4L101.7 443.9C64.2 406.4 64.2 345.6 101.7 308.2L109.1 300.8L111.6 298.7zM215.7 194.6C221.9 190.5 230.4 191.2 235.8 196.7L281.9 242.8L288 249.5C307.7 273.3 314.3 304.5 307.2 333.4C338.9 325.7 373.4 334.4 397.8 358.7L443.9 404.8C450.1 411 450.1 421.2 443.9 427.4L436.5 434.8C399 472.3 338.2 472.3 300.7 434.8L205.8 339.9C168.3 302.4 168.3 241.6 205.8 204.2L213.2 196.8L215.7 194.7zM527.2 79C536.6 69.6 551.8 69.6 561.2 79C570 87.8 570.5 101.7 562.8 111.2L561.2 113L446.7 227.4C454.4 228.4 461.9 230.4 469.2 233.3L527.5 175C536.9 165.6 552.1 165.6 561.5 175C570.3 183.8 570.8 197.7 563.1 207.1L561.4 208.9L508.7 261.6L547.7 300.6C553.9 306.8 553.9 317 547.7 323.2L540.3 330.6C502.8 368.1 442 368.1 404.5 330.6L309.6 235.7C272.1 198.2 272.1 137.4 309.6 100L317 92.6L319.5 90.5C325.7 86.4 334.2 87.1 339.6 92.6L378.6 131.6L431.3 78.9C440.7 69.5 455.9 69.5 465.3 78.9C474.1 87.7 474.6 101.6 466.9 111L465.2 112.8L406.9 171.1C409.7 178.2 411.6 185.6 412.6 193.2L527.2 79z'/%3E%3C/svg%3E");
+
+// Depot Icons
+$truck: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M32 160C32 124.7 60.7 96 96 96L384 96C419.3 96 448 124.7 448 160L448 192L498.7 192C515.7 192 532 198.7 544 210.7L589.3 256C601.3 268 608 284.3 608 301.3L608 448C608 483.3 579.3 512 544 512L540.7 512C530.3 548.9 496.3 576 456 576C415.7 576 381.8 548.9 371.3 512L268.7 512C258.3 548.9 224.3 576 184 576C143.7 576 109.8 548.9 99.3 512L96 512C60.7 512 32 483.3 32 448L32 160zM544 352L544 301.3L498.7 256L448 256L448 352L544 352zM224 488C224 465.9 206.1 448 184 448C161.9 448 144 465.9 144 488C144 510.1 161.9 528 184 528C206.1 528 224 510.1 224 488zM456 528C478.1 528 496 510.1 496 488C496 465.9 478.1 448 456 448C433.9 448 416 465.9 416 488C416 510.1 433.9 528 456 528z'/%3E%3C/svg%3E");
+$marker: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M128 252.6C128 148.4 214 64 320 64C426 64 512 148.4 512 252.6C512 371.9 391.8 514.9 341.6 569.4C329.8 582.2 310.1 582.2 298.3 569.4C248.1 514.9 127.9 371.9 127.9 252.6zM320 320C355.3 320 384 291.3 384 256C384 220.7 355.3 192 320 192C284.7 192 256 220.7 256 256C256 291.3 284.7 320 320 320z'/%3E%3C/svg%3E");
+$info: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M320 576C461.4 576 576 461.4 576 320C576 178.6 461.4 64 320 64C178.6 64 64 178.6 64 320C64 461.4 178.6 576 320 576zM288 224C288 206.3 302.3 192 320 192C337.7 192 352 206.3 352 224C352 241.7 337.7 256 320 256C302.3 256 288 241.7 288 224zM280 288L328 288C341.3 288 352 298.7 352 312L352 400L360 400C373.3 400 384 410.7 384 424C384 437.3 373.3 448 360 448L280 448C266.7 448 256 437.3 256 424C256 410.7 266.7 400 280 400L304 400L304 336L280 336C266.7 336 256 325.3 256 312C256 298.7 266.7 288 280 288z'/%3E%3C/svg%3E");
+
+// Profile Icons
+$users: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M320 64C355.3 64 384 92.7 384 128C384 163.3 355.3 192 320 192C284.7 192 256 163.3 256 128C256 92.7 284.7 64 320 64zM416 376C416 401 403.3 423 384 435.9L384 528C384 554.5 362.5 576 336 576L304 576C277.5 576 256 554.5 256 528L256 435.9C236.7 423 224 401 224 376L224 336C224 283 267 240 320 240C373 240 416 283 416 336L416 376zM160 96C190.9 96 216 121.1 216 152C216 182.9 190.9 208 160 208C129.1 208 104 182.9 104 152C104 121.1 129.1 96 160 96zM176 336L176 368C176 400.5 188.1 430.1 208 452.7L208 528C208 529.2 208 530.5 208.1 531.7C199.6 539.3 188.4 544 176 544L144 544C117.5 544 96 522.5 96 496L96 439.4C76.9 428.4 64 407.7 64 384L64 352C64 299 107 256 160 256C172.7 256 184.8 258.5 195.9 262.9C183.3 284.3 176 309.3 176 336zM432 528L432 452.7C451.9 430.2 464 400.5 464 368L464 336C464 309.3 456.7 284.4 444.1 262.9C455.2 258.4 467.3 256 480 256C533 256 576 299 576 352L576 384C576 407.7 563.1 428.4 544 439.4L544 496C544 522.5 522.5 544 496 544L464 544C451.7 544 440.4 539.4 431.9 531.7C431.9 530.5 432 529.2 432 528zM480 96C510.9 96 536 121.1 536 152C536 182.9 510.9 208 480 208C449.1 208 424 182.9 424 152C424 121.1 449.1 96 480 96z'/%3E%3C/svg%3E");
+$calendar: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M216 64C229.3 64 240 74.7 240 88L240 128L400 128L400 88C400 74.7 410.7 64 424 64C437.3 64 448 74.7 448 88L448 128L480 128C515.3 128 544 156.7 544 192L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 192C96 156.7 124.7 128 160 128L192 128L192 88C192 74.7 202.7 64 216 64zM216 176L160 176C151.2 176 144 183.2 144 192L144 240L496 240L496 192C496 183.2 488.8 176 480 176L216 176zM144 288L144 480C144 488.8 151.2 496 160 496L480 496C488.8 496 496 488.8 496 480L496 288L144 288z'/%3E%3C/svg%3E");
+$envelope: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M112 128C85.5 128 64 149.5 64 176C64 191.1 71.1 205.3 83.2 214.4L291.2 370.4C308.3 383.2 331.7 383.2 348.8 370.4L556.8 214.4C568.9 205.3 576 191.1 576 176C576 149.5 554.5 128 528 128L112 128zM64 260L64 448C64 483.3 92.7 512 128 512L512 512C547.3 512 576 483.3 576 448L576 260L377.6 408.8C343.5 434.4 296.5 434.4 262.4 408.8L64 260z'/%3E%3C/svg%3E");
+$phone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M224.2 89C216.3 70.1 195.7 60.1 176.1 65.4L170.6 66.9C106 84.5 50.8 147.1 66.9 223.3C104 398.3 241.7 536 416.7 573.1C493 589.3 555.5 534 573.1 469.4L574.6 463.9C580 444.2 569.9 423.6 551.1 415.8L453.8 375.3C437.3 368.4 418.2 373.2 406.8 387.1L368.2 434.3C297.9 399.4 241.3 341 208.8 269.3L253 233.3C266.9 222 271.6 202.9 264.8 186.3L224.2 89z'/%3E%3C/svg%3E");
+$globe: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M128 96C92.7 96 64 124.7 64 160L64 416C64 451.3 92.7 480 128 480L272 480L256 528L184 528C170.7 528 160 538.7 160 552C160 565.3 170.7 576 184 576L456 576C469.3 576 480 565.3 480 552C480 538.7 469.3 528 456 528L384 528L368 480L512 480C547.3 480 576 451.3 576 416L576 160C576 124.7 547.3 96 512 96L128 96zM160 160L480 160C497.7 160 512 174.3 512 192L512 352C512 369.7 497.7 384 480 384L160 384C142.3 384 128 369.7 128 352L128 192C128 174.3 142.3 160 160 160z'/%3E%3C/svg%3E");
+
+//categories
+$getraenke: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M240 32C240 14.3 254.3 0 272 0L368 0C385.7 0 400 14.3 400 32C400 43.8 393.6 54.2 384 59.7L384 205.3C440.5 230 480 286.4 480 352L480 576C480 611.3 451.3 640 416 640L224 640C188.7 640 160 611.3 160 576L160 352C160 286.4 199.5 230 256 205.3L256 59.7C246.4 54.2 240 43.8 240 32zM256 352C238.3 352 224 366.3 224 384L224 512C224 529.7 238.3 544 256 544L384 544C401.7 544 416 529.7 416 512L416 384C416 366.3 401.7 352 384 352L256 352z'/%3E%3C/svg%3E");
+$milch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M576 304.2L576 320L64 320C64 300 74 281.3 90.6 270.2L338.9 104.7C347.5 99 357.5 96 367.8 96C482.8 96 576 189.2 576 304.2zM576 368L576 480C576 515.3 547.3 544 512 544L128 544C92.7 544 64 515.3 64 480L64 368L576 368z'/%3E%3C/svg%3E");
+$fleisch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M589 160.7C603.4 175.1 601.4 199.1 584.7 210.9L520.1 256.6C476.4 287.5 440.9 328.5 416.7 376.2L391.4 426C366.3 475.3 329.3 517.5 283.6 548.6L209.5 599.2C196.4 608.1 178.8 606.5 167.7 595.3L122.8 550.4L209.3 483.9C251.6 451.4 286 409.6 309.9 361.9L334.4 312.8C358.9 263.8 396.2 222.2 442.3 192.6L551 122.7L589 160.7zM516.2 87.9L416.3 152.2C362.9 186.5 319.8 234.6 291.4 291.3L266.9 340.4C246.3 381.7 216.6 417.7 180 445.8L88.6 516.1L51.7 479.2C37.3 464.8 39.3 440.8 56 429L120.6 383.3C164.3 352.4 199.8 311.4 224 263.7L249.3 213.9C274.3 164.8 311.3 122.6 357 91.4L431.1 40.8C444.2 31.9 461.7 33.5 472.9 44.7L516.2 88z'/%3E%3C/svg%3E");
+$mehl: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M192 56C192 42.7 202.7 32 216 32L424 32C437.3 32 448 42.7 448 56C448 69.3 437.3 80 424 80L216 80C202.7 80 192 69.3 192 56zM160 192C160 156.7 188.7 128 224 128L416 128C451.3 128 480 156.7 480 192L480 512C480 547.3 451.3 576 416 576L224 576C188.7 576 160 547.3 160 512L160 192zM272 224L229.8 224C226.6 224 224 226.6 224 229.8C224 261.9 250 288 282.2 288L357.8 288C389.9 288 416 262 416 229.8C416 226.6 413.4 224 410.2 224L368 224C348.9 224 331.7 232.4 320 245.7C308.3 232.4 291.1 224 272 224zM320 341.7C308.3 328.4 291.1 320 272 320L229.8 320C226.6 320 224 322.6 224 325.8C224 357.9 250 384 282.2 384L357.8 384C389.9 384 416 358 416 325.8C416 322.6 413.4 320 410.2 320L368 320C348.9 320 331.7 328.4 320 341.7zM272 416L229.8 416C226.6 416 224 418.6 224 421.8C224 453.9 250 480 282.2 480L304 480L304 512C304 520.8 311.2 528 320 528C328.8 528 336 520.8 336 512L336 480L357.8 480C389.9 480 416 454 416 421.8C416 418.6 413.4 416 410.2 416L368 416C348.9 416 331.7 424.4 320 437.7C308.3 424.4 291.1 416 272 416z'/%3E%3C/svg%3E");
+$obst: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M320 176C311.2 176 304 168.8 304 160L304 144C304 99.8 339.8 64 384 64L400 64C408.8 64 416 71.2 416 80L416 96C416 140.2 380.2 176 336 176L320 176zM96 352C96 275.7 131.7 192 208 192C235.3 192 267.7 202.3 290.7 211.3C309.5 218.6 330.6 218.6 349.4 211.3C372.3 202.4 404.8 192 432.1 192C508.4 192 544.1 275.7 544.1 352C544.1 480 464.1 576 384.1 576C367.6 576 346 569.4 332.6 564.7C324.5 561.9 315.7 561.9 307.6 564.7C294.2 569.4 272.6 576 256.1 576C176.1 576 96.1 480 96.1 352z'/%3E%3C/svg%3E");
+$eingemacht: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 640'%3E%3Cpath d='M128 96C128 78.3 142.3 64 160 64L480 64C497.7 64 512 78.3 512 96L512 128C512 145.7 497.7 160 480 160L160 160C142.3 160 128 145.7 128 128L128 96zM160 208L480 208L480 512C480 547.3 451.3 576 416 576L224 576C188.7 576 160 547.3 160 512L232 512C245.3 512 256 501.3 256 488C256 474.7 245.3 464 232 464L160 464L160 416L232 416C245.3 416 256 405.3 256 392C256 378.7 245.3 368 232 368L160 368L160 320L232 320C245.3 320 256 309.3 256 296C256 282.7 245.3 272 232 272L160 272L160 208z'/%3E%3C/svg%3E");
+
+// Mixins
+@mixin responsive-grid($min-item-width: 250px) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min-item-width, 1fr));
+}
+
+//Normalization
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+img,
+video,
+iframe,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  text-decoration: none !important;
+  color: inherit !important;
+  box-shadow: none !important;
+}
+
+::selection {
+  background-color: $primary;
+  color: $white;
+}
+
+:focus-visible {
+  outline: 2px dashed $status-voll;
+  outline-offset: 2px;
+}
+
+// Icon Base Style (Placeholder)
+%icon-base {
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  background-color: currentColor;
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  vertical-align: middle;
+  position: relative;
+  content: "";
+  margin-right: 0.35em;
+}
+
+.solawi-cat-mehl {
+  &::before {
+    @extend %icon-base;
+    -webkit-mask-image: $mehl;
+    mask-image: $mehl;
+  }
+}
+
+.solawi-cat-obst {
+  &::before {
+    @extend %icon-base;
+    -webkit-mask-image: $obst;
+    mask-image: $obst;
+  }
+}
+
+.solawi-cat-eingemacht {
+  &::before {
+    @extend %icon-base;
+    -webkit-mask-image: $eingemacht;
+    mask-image: $eingemacht;
+  }
+}
+
+.solawi-cat-fleisch {
+  &::before {
+    @extend %icon-base;
+    -webkit-mask-image: $fleisch;
+    mask-image: $fleisch;
+  }
+}
+
+.solawi-cat-milchprodukte {
+  &::before {
+    @extend %icon-base;
+    -webkit-mask-image: $milch;
+    mask-image: $milch;
+  }
+}
+
+.solawi-cat-getraenke {
+  &::before {
+    @extend %icon-base;
+    -webkit-mask-image: $getraenke;
+    mask-image: $getraenke;
+  }
+}
+
+.solawi-cat-getreide {
+  &::before {
+    @extend %icon-base;
+    -webkit-mask-image: $getreide;
+    mask-image: $getreide;
+  }
+}
+
+.solawi-cat-gemuese {
+  &::before {
+    @extend %icon-base;
+    -webkit-mask-image: $gemuese;
+    mask-image: $gemuese;
+  }
+}
+
+.solawi-cat-brot {
+  &::before {
+    @extend %icon-base;
+    -webkit-mask-image: $brot;
+    mask-image: $brot;
+  }
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: $text;
+}
+
+h1 {
+  /* Schriftgröße: min. 36px bei 340px, max. 48px bei 1240px */
+  font-size: clamp(2.25rem, 1.9667rem + 1.3333vw, 3rem);
+  text-align: center;
+}
+
+h2 {
+  /* Schriftgröße: min. 28px bei 340px, max. 36px bei 1240px */
+  font-size: clamp(1.75rem, 1.5889rem + 0.8889vw, 2.25rem);
+  text-align: center;
+}
+
+h3 {
+  /* Schriftgröße: min. 22px bei 340px, max. 28px bei 1240px */
+  font-size: clamp(1.375rem, 1.2556rem + 0.6667vw, 1.75rem);
+  text-align: center;
+}
+
+h4 {
+  /* Schriftgröße: min. 18px bei 340px, max. 22px bei 1240px */
+  font-size: clamp(1.125rem, 1.0444rem + 0.4444vw, 1.375rem);
+  text-align: center;
+}
+
+p {
+  /* Schriftgröße: min. 16px bei 340px, max. 18px bei 1240px */
+  font-size: clamp(1rem, 0.9333rem + 0.2222vw, 1.125rem);
+}
+
+a {
+  color: $text !important;
+  text-decoration: none;
+}
+
+//Header
+#page-container {
+  header.et-l--header {
+
+    // Großes Logo-Modul sichtbar (Klasse 'gross' im Divi Modul)
+    .et_pb_module.gross {
+      display: block !important;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+      width: auto;
+    }
+
+    // Kleines Logo-Modul versteckt (Klasse 'klein' im Divi Modul)
+    .et_pb_module.klein {
+      display: none !important;
+      opacity: 0;
+    }
+
+    // Wenn gescrollt wird (.scroll Klasse aktiv)
+    &.scroll {
+      .et_pb_section {
+        background-color: rgba($primary, 0.9) !important;
+        transition: background-color 0.3s ease-in-out, padding 0.3s ease-in-out;
+      }
+
+      // Großes Logo ausblenden
+      .et_pb_module.gross {
+        display: none !important;
+        opacity: 0;
+      }
+
+      // Kleines Logo einblenden
+      .et_pb_module.klein {
+        display: block !important;
+        opacity: 1;
+        width: auto;
+
+        // Bildgröße für kleines Logo anpassen (innerhalb des Moduls)
+        .et_pb_image_wrap img {
+          max-height: 50px;
+          width: auto;
+        }
+      }
+    }
+  }
+}
+
+.menu-item a {
+  font-size: clamp(1.125rem, 1.0444rem + 0.4444vw, 1.375rem);
+}
+
+@media (max-width: 980px) {
+  #page-container {
+    header.et-l--header {
+      .et_pb_text_0_tb_header {
+        line-height: 1.3;
+
+        h3 {
+          font-size: clamp(1.125rem, 0.8889rem + 1.1111vw, 1.75rem);
+        }
+
+        p {
+          font-size: clamp(1rem, 0.9333rem + 0.2222vw, 1.125rem);
+        }
+      }
+
+      .mobile_menu_bar::before {
+        display: block;
+        transition: all .4s ease;
+        color: $heading !important;
+      }
+
+      .mobile_nav.opened .mobile_menu_bar::before {
+        content: "M";
+        transform: rotate(90deg);
+      }
+
+      #mobile_menu1 {
+        border-top: none;
+        border-radius: 10px;
+        box-shadow: 0 3px 3px $secondary !important;
+        white-space: nowrap;
+        width: auto;
+        position: absolute;
+        top: 25px;
+        right: 0;
+        left: auto;
+        margin: 0 10px 0 10px;
+        background-color: $white;
+        padding: 1rem;
+        padding-bottom: 0 !important;
+
+        li {
+          padding: 0 0 18px;
+
+          a {
+            background: none;
+            border: none;
+            color: $heading;
+            font-weight: 500;
+            font-size: 1.25rem;
+            padding: 0;
+
+            &:hover {
+              background: transparent;
+            }
+          }
+        }
+      }
+    }
+
+    .et_pb_fullwidth_menu_0_tb_header {
+      order: 3;
+      flex-basis: 50px;
+      flex-shrink: 0;
+
+      .et_pb_row {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .et_pb_menu__wrap {
+        order: 3;
+      }
+
+      .et_pb_menu__logo-wrap {
+        order: 1;
+        display: none;
+      }
+    }
+
+    .et_pb_button_0_tb_header_wrapper {
+      order: 2;
+      flex-shrink: 0;
+    }
+
+    .mobile-logo-img {
+      order: 1;
+      flex-basis: 50px;
+      flex-shrink: 0;
+      margin: 20px;
+      width: 100% !important;
+      height: 100% !important;
+
+      img {
+        width: 45px !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+   .et-l--header:not(.scroll) { 
+    .et_pb_group_0_tb_header{
+      --horizontal-gap: 0px;
+    }
+  }
+  #page-container header.et-l--header .et_pb_module.gross {
+        width: 70px !important;
+  }
+
+}
+/* --- Shortcode: Solawi Map --- */
+.leaflet-popup-content-wrapper {
+  border-radius: 4px;
+}
+
+.solawi-map-popup {
+  strong {
+    font-size: 1.1em;
+  }
+
+  small {
+    color: #666;
+  }
+
+  hr {
+    margin: 8px 0;
+    border: 0;
+    border-top: 1px solid mix(white, $text, 90%);
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+  }
+
+  li {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  img {
+    height: 30px;
+    object-fit: contain;
+    margin-right: 8px;
+  }
+
+  a {
+    color: $primary !important;
+  }
+}
+
+/* --- Shortcode: Solawi Map Pins --- */
+.custom-pin-marker {
+  background-color: $white;
+  border-radius: 50%;
+  border: 2px solid mix(white, $text, 60%);
+  /* Fallback */
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  width: 20px !important;
+  height: 20px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.pin-offen {
+    background-color: $status-offen;
+    border-color: $white;
+    box-shadow: 0 0 0 2px $status-offen, 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  &.pin-warteliste {
+    background-color: $status-warteliste;
+    border-color: $white;
+    box-shadow: 0 0 0 2px $status-warteliste, 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  &.pin-voll {
+    background-color: $status-voll;
+    border-color: $white;
+    box-shadow: 0 0 0 2px $status-voll, 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  &.pin-laden {
+    background-color: $status-laden;
+    border-color: $white;
+    box-shadow: 0 0 0 2px $status-laden, 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  &.pin-kiste {
+    background-color: $status-kiste;
+    border-color: $white;
+    box-shadow: 0 0 0 2px $status-kiste, 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  // --- SPECIAL STANDORTE ---
+  &.pin-type-hof,
+  &.pin-type-laden,
+  &.pin-type-kiste {
+    width: 30px !important;
+    height: 30px !important;
+    margin-left: -15px !important;
+    margin-top: -15px !important;
+    border-radius: 4px;
+    z-index: 1000 !important;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      width: 16px !important;
+      height: 16px !important;
+      background-color: #ffffff !important;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      z-index: 2;
+    }
+  }
+
+
+  &.pin-type-hof::after {
+    -webkit-mask-image: $hof-icon;
+    mask-image: $hof-icon;
+  }
+
+  &.pin-type-laden::after {
+    -webkit-mask-image: $laden-icon;
+    mask-image: $laden-icon;
+  }
+
+  &.pin-type-kiste::after {
+    -webkit-mask-image: $kiste-icon;
+    mask-image: $kiste-icon;
+  }
+}
+
+/* --- Shortcode: Solawi Search Grid --- */
+.solawi-filters {
+  margin-bottom: 3rem;
+  background: mix(white, $primary, 98%);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid mix(white, $text, 90%);
+
+  .filter-row-top {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+  }
+
+  input[type="text"],
+  select {
+    padding: 10px;
+    border: 1px solid mix(white, $text, 80%);
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .filter-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+  }
+
+  .filter-item {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: $white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 1px solid mix(white, $text, 85%);
+    font-size: 0.9em;
+    transition: background-color 0.2s, border-color 0.2s;
+
+    &:hover {
+      background-color: darken($white, 3%);
+    }
+  }
+}
+
+#solawi-loader .dashicons {
+  animation: spin 2s infinite linear;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.solawi-grid {
+  @include responsive-grid(250px);
+  gap: 2rem;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.solawi-card {
+  // Base variable (can be overridden by inline styles from ACF)
+  --solawi-color: #{mix(white, $text, 80%)};
+
+  border: 1px solid mix(white, $text, 90%); // Seiten- und unterer Rand
+  border-top: 5px solid var(--solawi-color); // Dynamische Randfarbe
+  border-radius: 8px;
+  overflow: hidden;
+
+  // Dynamischer Hintergrund (farb-mix mit Weiß für ~13% Deckkraft)
+  background-color: color-mix(in srgb, var(--solawi-color), #{$white} 87%);
+
+  transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  }
+
+  &-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  &-image {
+    position: relative; // For status badge positioning
+    height: 120px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #ffffff77;
+  }
+
+  &-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  &-title {
+    margin: 0 0 10px 0;
+    font-size: clamp(1.1rem, 1rem + 0.5vw, 1.25rem);
+    color: $heading;
+  }
+
+  &-cats {
+    margin-bottom: 10px;
+  }
+
+  .solawi-cat-badge {
+    background: #fff;
+    color: var(--solawi-color, $primary);
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 8px;
+    margin-right: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+
+  &-excerpt {
+    flex-grow: 1;
+    margin-bottom: 15px;
+    color: $text;
+    display: -webkit-box;
+    line-clamp: 4;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    align-content: end;
+  }
+
+  .solawi-btn {
+    display: inline-block;
+    margin-top: auto;
+    font-weight: bold;
+    color: var(--solawi-color, $primary);
+    font-size: 0.9rem;
+    text-wrap: balance;
+    padding: 0.5rem;
+    background: #fff;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  /* Modifikatoren für die Kacheln: Überschreiben nur die Variable */
+  &.status-offen {
+    --solawi-color: #{$status-offen};
+  }
+
+  &.status-warteliste {
+    --solawi-color: #{$status-warteliste};
+  }
+
+  &.status-voll {
+    --solawi-color: #{$status-voll};
+  }
+
+  &.status-laden {
+    --solawi-color: #{$status-laden};
+  }
+
+  &.status-kiste {
+    --solawi-color: #{$status-kiste};
+  }
+
+  /* Status Badge Styling */
+  .solawi-status-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: $white;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    &.status-offen {
+      background-color: $status-offen;
+    }
+
+    &.status-warteliste {
+      background-color: $status-warteliste;
+    }
+
+    &.status-voll {
+      background-color: $status-voll;
+    }
+
+    &.status-laden {
+      background-color: $status-laden;
+    }
+
+    &.status-kiste {
+      background-color: $status-kiste;
+    }
+  }
+}
+
+/* --- Solawi Events Shortcode --- */
+.solawi-events-container {
+  margin: 40px 0;
+}
+
+.solawi-events-grid {
+  @include responsive-grid(250px);
+  gap: 2rem;
+}
+
+.solawi-event-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .solawi-event-image {
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+
+  .solawi-event-date-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    min-width: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    .day {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1;
+      color: $primary;
+    }
+
+    .month {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: $text;
+      margin-top: 2px;
+    }
+  }
+
+  .solawi-event-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .solawi-event-title {
+    margin: 0 0 10px 0;
+    font-size: 1.25rem;
+    color: $heading;
+    line-height: 1.3;
+  }
+
+  .solawi-event-meta {
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    color: lighten($text, 20%);
+
+    .meta-item {
+      display: block;
+      margin-bottom: 4px;
+
+      i {
+        margin-right: 6px;
+        color: $accent;
+      }
+    }
+  }
+
+  .solawi-event-excerpt {
+    font-size: 0.95rem;
+    color: $text;
+    margin-bottom: 15px;
+    flex-grow: 1;
+    display: -webkit-box;
+    line-clamp: 10;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .solawi-btn-small {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: $primary;
+    color: $white !important;
+    text-decoration: none;
+    border-radius: 8px;
+    align-self: flex-start;
+    transition: background 0.3s;
+    margin-top: auto;
+
+    &:hover {
+      background-color: darken($primary, 5%);
+    }
+  }
+}
+
+
+/* --- Solawi Depot List (Single Page) --- */
+.solawi-depot-list {
+  @include responsive-grid(250px);
+  gap: 1.5rem;
+  margin: 30px 0;
+}
+
+.single-depot-item {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
+  }
+
+  .depot-title {
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    color: $heading;
+    font-weight: 700;
+  }
+
+  .depot-time {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      @extend %icon-base;
+      -webkit-mask-image: $truck;
+      mask-image: $truck;
+      width: 1.1rem;
+      height: 1.1rem;
+      background-color: $heading;
+    }
+  }
+
+  .depot-map-link {
+    font-size: 0.85rem;
+    color: $accent;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+
+    &::before {
+      @extend %icon-base;
+      -webkit-mask-image: $marker;
+      mask-image: $marker;
+    }
+
+    &:hover {
+      color: darken($accent, 10%);
+    }
+  }
+
+  .depot-info {
+    font-size: 0.85rem;
+    color: lighten($text, 15%);
+    border-top: 1px solid #f5f5f5;
+    padding-top: 10px;
+    margin-top: auto;
+    display: flex;
+    align-items: flex-start;
+
+    &::before {
+      @extend %icon-base;
+      -webkit-mask-image: $info;
+      mask-image: $info;
+      flex-shrink: 0;
+      margin-top: 2px;
+      background-color: $text
+    }
+  }
+}
+
+/* --- Solawi Profile Card (Quartet) --- */
+.solawi-profile-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 450px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
+
+  .profile-card-header {
+    background: #f8f8f8;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .profile-card-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &.status-offen {
+      background: $status-offen-bg;
+      color: $status-offen;
+    }
+
+    &.status-warteliste {
+      background: $status-warteliste-bg;
+      color: $status-warteliste;
+    }
+
+    &.status-voll {
+      background: $status-voll-bg;
+      color: $status-voll;
+    }
+
+    &.status-laden {
+      background: $status-laden-bg;
+      color: $status-laden;
+    }
+
+    &.status-kiste {
+      background: $status-kiste-bg;
+      color: $status-kiste;
+    }
+  }
+
+  .profile-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+
+  .stat-item {
+    padding: 15px 20px;
+    border-bottom: 1px solid #f5f5f5;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    align-items: center;
+    position: relative;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &::before {
+      @extend %icon-base;
+      grid-column: 1;
+      width: 1.25rem;
+      height: 1.25rem;
+      margin-right: 0;
+      color: $primary;
+    }
+
+    .stat-label {
+      position: absolute;
+      top: 10px;
+      left: 60px;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      color: #999;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    .stat-value {
+      grid-column: 2;
+      font-size: 1rem;
+      color: $heading;
+      font-weight: 500;
+      padding-top: 12px;
+
+      a {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+          color: $primary;
+        }
+      }
+
+      .sep {
+        color: #ccc;
+        margin: 0 5px;
+      }
+    }
+
+    // Specific Icons
+    &.stat-members::before {
+      -webkit-mask-image: $users;
+      mask-image: $users;
+    }
+
+    &.stat-year::before {
+      -webkit-mask-image: $calendar;
+      mask-image: $calendar;
+    }
+
+    &.stat-address::before {
+      -webkit-mask-image: $marker;
+      mask-image: $marker;
+    }
+
+    &.stat-mail::before {
+      -webkit-mask-image: $envelope;
+      mask-image: $envelope;
+    }
+
+    &.stat-phone::before {
+      -webkit-mask-image: $phone;
+      mask-image: $phone;
+    }
+
+    &.stat-web::before {
+      -webkit-mask-image: $globe;
+      mask-image: $globe;
+    }
+  }
+}
