@@ -1100,9 +1100,6 @@ a {
     border-top: 1px solid #f5f5f5;
     padding-top: 10px;
     margin-top: auto;
-    overflow-wrap: break-word;
-    word-break: break-all;
-    word-wrap: break-word;
     display: flex;
     align-items: flex-start;
 
@@ -1113,6 +1110,13 @@ a {
       flex-shrink: 0;
       margin-top: 2px;
       background-color: $text;
+    }
+
+    /* Sollen nur Links umbrechen, nicht der normale Text */
+    a {
+      overflow-wrap: break-word;
+      word-break: break-all;
+      /* word-wrap ist ein Alias für overflow-wrap */
     }
 
     .depot-info-line {
@@ -1281,28 +1285,44 @@ a {
   margin: auto;
   overflow: hidden;
   margin-bottom: 2rem;
+  border-radius: 8px;
+  aspect-ratio: 16 / 9; /* WICHTIG: Gibt dem Container eine Höhe, sonst ist er 0px hoch */
+  background-color: #f4e2c1; /* Platzhalter-Farbe, falls Bilder langsam laden */
 
-  /* Hide the images by default */
   .solawi-slide {
-    display: none;
-    animation-name: fade;
-    animation-duration: 1.5s;
-
-    /* Show the active image */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.8s ease-in-out;
+    /* Aktiver Slide wird sichtbar und nach vorne geholt */
     &.active {
-      display: block;
-    }
-
-    /* Make images responsive */
-    img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-      max-height: 600px;
-      border-radius: 8px;
+      opacity: 1;
+      visibility: visible;
+      z-index: 5;
     }
   }
+
+  /* Neuer Wrapper, der Flexbox für die Zentrierung nutzt (ersetzt object-fit) */
+  .solawi-slide-img-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      border-radius: 8px; /* Der Radius wird jetzt direkt auf das Bild angewendet */
+    }
+  }
+  /* Navigation Buttons */
 
   /* Next & previous buttons */
   .solawi-slider-prev,
@@ -1380,16 +1400,5 @@ a {
     padding: 8px 12px;
     position: absolute;
     top: 0;
-  }
-}
-
-/* Fading animation */
-@keyframes fade {
-  from {
-    opacity: .4
-  }
-
-  to {
-    opacity: 1
   }
 }

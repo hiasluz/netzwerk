@@ -37,11 +37,13 @@ function solawi_slider_shortcode() {
             $active_class = ($count === 1) ? 'active' : '';
 
             $slides_html .= '<div class="solawi-slide ' . $active_class . '">';
+            // Neuer Wrapper für die Zentrierung des Bildes (ersetzt object-fit)
+            $slides_html .= '<div class="solawi-slide-img-wrapper">';
             $slides_html .= '<img src="' . esc_url($img_src) . '" alt="' . esc_attr($img_alt) . '" />';
-            
+            $slides_html .= '</div>';
             // Optional: Image Caption if user wants it (ACF image 'caption' or 'title')
             // $slides_html .= '<div class="text">Caption Text</div>';
-            
+
             $slides_html .= '</div>';
         }
     }
