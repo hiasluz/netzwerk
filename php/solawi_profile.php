@@ -19,6 +19,7 @@ function solawi_profile_card_shortcode_render() {
     $mail       = get_field('mail', $post_id);
     $telefon    = get_field('telefon', $post_id);
     $homepage   = get_field('homepage', $post_id);
+    $social_media = get_field('social_media', $post_id);
     
     // Status Label & Farbe
     $status_label = '';
@@ -98,6 +99,25 @@ function solawi_profile_card_shortcode_render() {
                         $display_url = rtrim($display_url, '/');
                     ?>
                     <a href="<?php echo esc_url($homepage); ?>" target="_blank"><?php echo esc_html($display_url); ?></a>
+                </div>
+            </div>
+            <?php endif; ?>
+
+            <?php 
+            // Filter out empty values from the social media array
+            $active_socials = is_array($social_media) ? array_filter($social_media) : [];
+            if( !empty($active_socials) ): 
+            ?>
+            <div class="stat-item stat-social">
+                <div class="stat-label">Social Media</div>
+                <div class="stat-value social-icons">
+                    <?php foreach($active_socials as $network => $url): ?>
+                        <a href="<?php echo esc_url($url); ?>" 
+                           class="social-icon social-icon-<?php echo esc_attr($network); ?>" 
+                           target="_blank" 
+                           rel="noopener" 
+                           aria-label="<?php echo esc_attr(ucfirst($network)); ?>"></a>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <?php endif; ?>
