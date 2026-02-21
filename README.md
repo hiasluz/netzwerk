@@ -10,6 +10,7 @@ Dieses Repository enthält das Child-Theme für die Webseite des Ernährungsnetz
   - Lieferort (Depot)
   - Angebotenen Produkten (Produktkategorien)
 - **Veranstaltungssystem:** Ein Custom Post Type für Veranstaltungen mit Anzeige kommender Termine, inklusive Unterstützung für mehrtägige Events.
+- **Dynamisches Design:** Solawi-spezifische Farben werden automatisch auf Überschriften, Icons und andere Design-Elemente auf der jeweiligen Detailseite angewendet.
 - **Strukturierte Daten (CPTs):** Eigene Post-Types für `Solawi`, `Depot` und `Veranstaltung` sorgen für eine saubere und wartbare Datenhaltung.
 - **Automatische SEO-Optimierung:** Generiert automatisch valides `FAQPage`- und `Event`-Schema (JSON-LD) aus den Inhalten, was die Sichtbarkeit in Suchmaschinen verbessert.
 - **WordPress-Anpassungen & Härtung:**
@@ -48,6 +49,13 @@ Ein Großteil der Daten wird über ACF-Felder verwaltet. Stelle sicher, dass das
 - `gruendungsjahr`: Zahl
 - `betriebsstatte_adresse`: Textbereich
 - `mail`, `telefon`, `homepage`: E-Mail, Text, URL
+- `social_media`: Gruppe (Group)
+  - `instagram`: URL
+  - `facebook`: URL
+  - `telegram`: URL
+  - `mastodon`: URL
+  - `bluesky`: URL
+  - `youtube`: URL
 
 #### Feldgruppe: "Depot Daten" (zugewiesen an CPT `depot`)
 
@@ -91,10 +99,10 @@ Das Theme stellt mehrere Shortcodes zur Verfügung, die im Divi Builder oder and
 
 - `[solawi_profile_card]`
   - **Funktion:** Zeigt eine "Quartett"-artige Karte mit den Stammdaten einer Solawi (Gründungsjahr, Mitglieder etc.).
-  - **Einsatzort:** Nur auf der Template-Seite für einzelne Solawis (`solawi`).
+  - **Einsatzort:** Nur auf der Template-Seite für einzelne Solawis (`solawi`). Die Icons übernehmen automatisch die Farbe der Solawi.
 
 - `[solawi_single_depots_list]`
-  - **Funktion:** Zeigt eine Liste der Depots, die von einer bestimmten Solawi beliefert werden.
+  - **Funktion:** Zeigt eine Liste der Depots, die von einer bestimmten Solawi beliefert werden. Die Titel der Depots werden automatisch in der Farbe der Solawi dargestellt.
   - **Einsatzort:** Nur auf der Template-Seite für einzelne Solawis (`solawi`).
 
 - `[solawi_slider]`
@@ -104,7 +112,7 @@ Das Theme stellt mehrere Shortcodes zur Verfügung, die im Divi Builder oder and
 ## Entwicklung
 
 - **Styling:** Alle Styles werden in `style.scss` geschrieben. Diese Datei muss mit einem SCSS-Compiler (z.B. via Node.js/Gulp, Prepros oder VS Code Extension) in die `style.css` kompiliert werden, damit die Änderungen sichtbar werden.
-- **PHP-Logik:** Die Funktionalität ist modular in mehrere PHP-Dateien im `/php/` Verzeichnis aufgeteilt, die von der `functions.php` geladen werden.
+- **PHP-Logik:** Die Funktionalität ist modular in mehrere PHP-Dateien im `/php/` Verzeichnis aufgeteilt, die von der `functions.php` geladen werden. Funktionen, die sich speziell auf die Einzelansicht einer Solawi beziehen, sind in `php/solawi_profile.php` gebündelt.
 - **JavaScript:** Eigene Skripte für die interaktiven Features (Karte, Filter) befinden sich im `/js/` Verzeichnis.
 
 ---
