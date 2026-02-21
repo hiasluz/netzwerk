@@ -1199,7 +1199,15 @@ a {
   top: 0;
 }
 
-.solawi-post-titel .et_pb_image_wrap {
+/* --- Single Solawi Page --- */
+body.single-solawi {
+  /* The --solawi-color variable is injected here via PHP */
+}
+body.single-solawi .solawi-post-titel h1,
+body.single-solawi .solawi-post-titel h1.entry-title {
+  color: var(--solawi-color, #2D2D2D);
+}
+body.single-solawi .solawi-post-titel .et_pb_image_wrap {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1472,10 +1472,20 @@ a {
     top: 0;
   }
 } 
-.solawi-post-titel {
-  .et_pb_image_wrap{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+/* --- Single Solawi Page --- */
+body.single-solawi {
+  /* The --solawi-color variable is injected here via PHP */
+  .solawi-post-titel {
+    // Color the main post title (h1)
+    h1,
+    h1.entry-title {
+      color: var(--solawi-color, #{$heading});
+    }
+    .et_pb_image_wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }

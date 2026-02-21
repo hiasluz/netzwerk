@@ -286,18 +286,11 @@ function solawi_single_depots_list_render() {
     // Da wir Rückgabeformat "Post ID" eingestellt haben, bekommen wir ein Array von IDs
     $depot_ids = get_field('belieferte_depots', $post_id);
 
-	    // Solawi-Farbe für die Titel holen
-    $solawi_color = get_field('solawi_farbe', $post_id);
-    $style_attr = '';
-    if ($solawi_color) {
-        $style_attr = 'style="--solawi-color: ' . esc_attr($solawi_color) . ';"';
-    }
-
     if ( ! $depot_ids ) {
         return '<p>Keine Depots angegeben.</p>';
     }
 
-    $output = '<div class="solawi-depot-list" ' . $style_attr . '>';
+    $output = '<div class="solawi-depot-list">';
     
     foreach ( $depot_ids as $depot_id ) {
         // Daten des Depots holen
@@ -331,3 +324,18 @@ function solawi_single_depots_list_render() {
     return $output;
 }
 add_shortcode('solawi_single_depots_list', 'solawi_single_depots_list_render');
+
+/**
+ * Stellt die individuelle Solawi-Farbe als globale CSS-Variable (--solawi-color)
+ * auf den Einzel-Seiten der Solawis zur Verfügung.
+ */
+function solawi_global_color_variable() {
+    if ( is_singular('solawi') ) {
+        $solawi_color = get_field('solawi_farbe', get_the_ID());
+        if ( $solawi_color ) {
+            $custom_css = 'body.single-solawi { --solawi-color: ' . esc_attr($solawi_color) . '; }';
+            wp_add_inline_style( 'child-style', $custom_css );
+        }
+    }
+}
+add_action( 'wp_enqueue_scripts', 'solawi_global_color_variable', 20 );
