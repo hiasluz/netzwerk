@@ -275,6 +275,7 @@ function ernaehrung_check_email_privacy() {
 add_action('wp_ajax_check_email', 'ernaehrung_check_email_privacy');
 add_action('wp_ajax_nopriv_check_email', 'ernaehrung_check_email_privacy');
 #endregion Harden WordPress Security
+
 function solawi_single_depots_list_render() {
     // Nur auf Einzelansicht ausführen
     if ( ! is_singular('solawi') ) return '';
@@ -285,11 +286,18 @@ function solawi_single_depots_list_render() {
     // Da wir Rückgabeformat "Post ID" eingestellt haben, bekommen wir ein Array von IDs
     $depot_ids = get_field('belieferte_depots', $post_id);
 
+	    // Solawi-Farbe für die Titel holen
+    $solawi_color = get_field('solawi_farbe', $post_id);
+    $style_attr = '';
+    if ($solawi_color) {
+        $style_attr = 'style="--solawi-color: ' . esc_attr($solawi_color) . ';"';
+    }
+
     if ( ! $depot_ids ) {
         return '<p>Keine Depots angegeben.</p>';
     }
 
-    $output = '<div class="solawi-depot-list">';
+    $output = '<div class="solawi-depot-list" ' . $style_attr . '>';
     
     foreach ( $depot_ids as $depot_id ) {
         // Daten des Depots holen

@@ -830,7 +830,7 @@ a {
 .single-depot-item .depot-title {
   margin: 0 0 10px 0;
   font-size: 1.1rem;
-  color: #2D2D2D;
+  color: var(--solawi-color, #2D2D2D);
   font-weight: 700;
 }
 .single-depot-item .depot-time {
@@ -1197,4 +1197,10 @@ a {
   padding: 8px 12px;
   position: absolute;
   top: 0;
+}
+
+.solawi-post-titel .et_pb_image_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }/*# sourceMappingURL=style.css.map */

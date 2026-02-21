@@ -1062,7 +1062,7 @@ a {
   .depot-title {
     margin: 0 0 10px 0;
     font-size: 1.1rem;
-    color: $heading;
+    color: var(--solawi-color, #{$heading});
     font-weight: 700;
   }
 
@@ -1263,7 +1263,6 @@ a {
         gap: 1rem;
         align-items: center;
         justify-content: center;
-;
 
         .social-icon {
           -webkit-mask-repeat: no-repeat;
@@ -1473,3 +1472,10 @@ a {
     top: 0;
   }
 } 
+.solawi-post-titel {
+  .et_pb_image_wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
