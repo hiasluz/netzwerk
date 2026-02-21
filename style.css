@@ -981,7 +981,7 @@ a {
   font-size: 1rem;
   color: #2D2D2D;
   font-weight: 500;
-  padding-top: 12px;
+  padding-top: 1.5rem;
 }
 .solawi-profile-card .stat-item .stat-value a {
   color: inherit;
@@ -997,8 +997,9 @@ a {
 .solawi-profile-card .stat-item .stat-value.social-icons {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 1rem;
   align-items: center;
+  justify-content: center;
 }
 .solawi-profile-card .stat-item .stat-value.social-icons .social-icon {
   -webkit-mask-repeat: no-repeat;
