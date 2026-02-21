@@ -1,7 +1,9 @@
 <?php
 /**
- * Shortcode: [solawi_profile_card]
- * Zeigt die Eckdaten einer Solawi im "Quartett-Stil" an.
+ * Funktionen für die Einzelansicht einer Solawi (single-solawi.php).
+ * - Shortcode: [solawi_profile_card]
+ * - Shortcode: [solawi_single_depots_list]
+ * - Globale CSS-Variable für Solawi-Farbe
  * Nur auf Solawi-Einzelseiten sinnvoll.
  */
 
@@ -129,3 +131,71 @@ function solawi_profile_card_shortcode_render() {
 }
 
 add_shortcode('solawi_profile_card', 'solawi_profile_card_shortcode_render');
+
+
+/**
+ * Shortcode: [solawi_single_depots_list]
+ * Zeigt eine Liste der Depots an, die von der aktuellen Solawi beliefert werden.
+ */
+function solawi_single_depots_list_render() {
+    // Nur auf Einzelansicht ausführen
+    if ( ! is_singular('solawi') ) return '';
+
+    $post_id = get_the_ID();
+    
+    // Die IDs der verknüpften Depots holen
+    $depot_ids = get_field('belieferte_depots', $post_id);
+
+    if ( ! $depot_ids ) {
+        return '<p>Keine Depots angegeben.</p>';
+    }
+
+    $output = '<div class="solawi-depot-list">';
+    
+    foreach ( $depot_ids as $depot_id ) {
+        // Daten des Depots holen
+        $title = get_the_title( $depot_id );
+        $zeit  = get_field( 'anlieferzeit', $depot_id );
+        $info  = get_field( 'abholhinweis', $depot_id );
+
+        $output .= '<div class="single-depot-item">';
+        $output .= '<h4 class="depot-title">' . esc_html($title) . '</h4>';
+        
+        if($zeit) {
+            $output .= '<div class="depot-time">' . esc_html($zeit) . '</div>';
+        }
+        
+        $output .= '<a href="#solawi-map" class="solawi-map-focus-trigger depot-map-link" data-depot-id="' . esc_attr($depot_id) . '" aria-label="Depot ' . esc_attr($title) . ' auf Karte zeigen">Auf Karte zeigen</a>';
+        
+        if($info) {
+             $lines = preg_split('/\r\n|\r|\n/', trim($info));
+             $lines_html = '';
+             foreach($lines as $line) {
+                 $line = trim($line);
+                 if($line === '') continue;
+                 $lines_html .= '<div class="depot-info-line">' . make_clickable(esc_html($line)) . '</div>';
+             }
+             $output .= '<div class="depot-info"><span>' . $lines_html . '</span></div>';
+        }
+        $output .= '</div>';
+    }
+
+    $output .= '</div>';
+    return $output;
+}
+add_shortcode('solawi_single_depots_list', 'solawi_single_depots_list_render');
+
+/**
+ * Stellt die individuelle Solawi-Farbe als globale CSS-Variable (--solawi-color)
+ * auf den Einzel-Seiten der Solawis zur Verfügung.
+ */
+function solawi_global_color_variable() {
+    if ( is_singular('solawi') ) {
+        $solawi_color = get_field('solawi_farbe', get_the_ID());
+        if ( $solawi_color ) {
+            $custom_css = 'body.single-solawi { --solawi-color: ' . esc_attr($solawi_color) . '; }';
+            wp_add_inline_style( 'child-style', $custom_css );
+        }
+    }
+}
+add_action( 'wp_enqueue_scripts', 'solawi_global_color_variable', 20 );
