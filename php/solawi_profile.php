@@ -19,6 +19,7 @@ function solawi_profile_card_shortcode_render() {
     $mail       = get_field('mail', $post_id);
     $telefon    = get_field('telefon', $post_id);
     $homepage   = get_field('homepage', $post_id);
+    $solawi_color = get_field('solawi_farbe', $post_id);
     $social_media = get_field('social_media', $post_id);
     
     // Status Label & Farbe
@@ -31,9 +32,15 @@ function solawi_profile_card_shortcode_render() {
         case 'kiste': $status_label = 'Biokiste'; break;
     }
 
+    // Style-Attribut für die Solawi-Farbe
+    $style_attr = '';
+    if ($solawi_color) {
+        $style_attr = 'style="--solawi-color: ' . esc_attr($solawi_color) . ';"';
+    }
+
     ob_start();
     ?>
-    <div class="solawi-profile-card">
+    <div class="solawi-profile-card" <?php echo $style_attr; ?>>
         <div class="profile-card-header">
             <span class="profile-card-badge status-<?php echo esc_attr($status_key); ?>">
                 <?php echo esc_html($status_label); ?>
