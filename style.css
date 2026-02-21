@@ -1027,8 +1027,8 @@ a {
   overflow: hidden;
   margin-bottom: 2rem;
   border-radius: 8px;
-  aspect-ratio: 16/9; /* WICHTIG: Gibt dem Container eine Höhe, sonst ist er 0px hoch */
-  background-color: #f4e2c1; /* Platzhalter-Farbe, falls Bilder langsam laden */
+  aspect-ratio: 1/1;
+  background-color: #f4e2c1;
 }
 .solawi-slider-container .solawi-slide {
   position: absolute;
@@ -1116,7 +1116,7 @@ a {
 }
 .solawi-slider-container .solawi-slider-next {
   right: 0;
-  border-radius: 3px 0 0 3px;
+  border-radius: 8px;
 }
 .solawi-slider-container .solawi-slider-next::after {
   transform: rotate(45deg);
