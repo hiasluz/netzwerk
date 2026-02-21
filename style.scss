@@ -1153,9 +1153,6 @@ a {
   max-width: 450px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
 
-  // Fallback-Farbe, wird per Inline-Style überschrieben
-  --solawi-color: #{$secondary};
-
   .profile-card-header {
     background: #f8f8f8;
     padding: 15px 20px;
@@ -1271,12 +1268,12 @@ a {
           mask-position: center;
           -webkit-mask-size: contain;
           mask-size: contain;
-          background-color: var(--solawi-color);
+          background-color: var(--solawi-color, #{$primary});
           display: inline-block;
           width: 1.5rem;
           height: 1.5rem;
-          transition: filter 0.2s;
-          font-size: 0; // Versteckt Text-Überbleibsel
+          transition: color 0.2s, filter 0.2s;
+          font-size: 0; 
 
           &:hover {
             filter: brightness(85%);

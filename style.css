@@ -907,7 +907,6 @@ a {
   overflow: hidden;
   max-width: 450px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
-  --solawi-color: #5D4037;
 }
 .solawi-profile-card .profile-card-header {
   background: #f8f8f8;
@@ -1009,11 +1008,11 @@ a {
   mask-position: center;
   -webkit-mask-size: contain;
   mask-size: contain;
-  background-color: var(--solawi-color);
+  background-color: var(--solawi-color, #3A6B46);
   display: inline-block;
   width: 1.5rem;
   height: 1.5rem;
-  transition: filter 0.2s;
+  transition: color 0.2s, filter 0.2s;
   font-size: 0;
 }
 .solawi-profile-card .stat-item .stat-value.social-icons .social-icon:hover {
