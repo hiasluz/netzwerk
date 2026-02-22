@@ -561,7 +561,7 @@ a {
     margin-bottom: 5px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 
   img {
@@ -572,6 +572,7 @@ a {
 
   a {
     color: $primary !important;
+    text-align: end;
   }
 }
 
@@ -1083,7 +1084,7 @@ a {
       mask-image: $truck;
       width: 1.1rem;
       height: 1.1rem;
-      background-color: $heading;
+      background-color: var(--solawi-color, #{$heading});
     }
   }
 
@@ -1101,6 +1102,7 @@ a {
       @extend %icon-base;
       -webkit-mask-image: $marker;
       mask-image: $marker;
+      background-color: var(--solawi-color, #{$heading});
     }
 
     &:hover {
@@ -1123,7 +1125,7 @@ a {
       mask-image: $info;
       flex-shrink: 0;
       margin-top: 2px;
-      background-color: $text;
+      background-color: var(--solawi-color, #{$heading});
     }
 
     /* Sollen nur Links umbrechen, nicht der normale Text */
