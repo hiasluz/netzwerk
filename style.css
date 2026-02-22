@@ -1083,18 +1083,18 @@ a {
   overflow: hidden;
   margin-bottom: 2rem;
   border-radius: 8px;
-  aspect-ratio: 1/1;
   background-color: #f4e2c1;
+  transition: height 0.5s ease-in-out;
 }
 .solawi-slider-container .solawi-slide {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: auto;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 1.8s ease-in-out;
+  transition: opacity 1.2s ease-in-out;
   /* Aktiver Slide wird sichtbar und nach vorne geholt */
 }
 .solawi-slider-container .solawi-slide.active {
@@ -1103,21 +1103,20 @@ a {
   z-index: 5;
 }
 .solawi-slider-container {
-  /* Neuer Wrapper, der Flexbox für die Zentrierung nutzt (ersetzt object-fit) */
+  /* Wrapper für das Bild */
 }
 .solawi-slider-container .solawi-slide-img-wrapper {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .solawi-slider-container .solawi-slide-img-wrapper img {
   max-width: 100%;
-  max-height: 100%;
-  width: auto;
   height: auto;
-  border-radius: 8px; /* Der Radius wird jetzt direkt auf das Bild angewendet */
+  display: block;
+  border-radius: 8px;
 }
 .solawi-slider-container {
   /* Navigation Buttons */
@@ -1127,14 +1126,15 @@ a {
 .solawi-slider-container .solawi-slider-next {
   cursor: pointer;
   position: absolute;
-  top: 50%;
+  top: calc(var(--min-height, 100%) / 2);
+  /* Zentriert basierend auf dem kleinsten Bild */
+  transform: translateY(-50%);
   width: auto;
   padding: 10px;
   color: #F4F1EA;
   font-weight: bold;
   font-size: 18px;
-  transition: 0.6s ease;
-  transform: translateY(-50%);
+  transition: 0.6s ease, top 0.3s ease;
   border-radius: 8px;
   -webkit-user-select: none;
      -moz-user-select: none;

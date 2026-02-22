@@ -909,7 +909,7 @@ a {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: grid;
-  grid-template-rows: subgrid; 
+  grid-template-rows: subgrid;
   grid-row: span 5;
   gap: 0;
 
@@ -1277,7 +1277,7 @@ a {
           width: 1.5rem;
           height: 1.5rem;
           transition: color 0.2s, filter 0.2s;
-          font-size: 0; 
+          font-size: 0;
 
           &:hover {
             filter: brightness(85%);
@@ -1287,22 +1287,27 @@ a {
             -webkit-mask-image: $instagram;
             mask-image: $instagram;
           }
+
           &.social-icon-facebook {
             -webkit-mask-image: $facebook;
             mask-image: $facebook;
           }
+
           &.social-icon-telegram {
             -webkit-mask-image: $telegram;
             mask-image: $telegram;
           }
+
           &.social-icon-mastodon {
             -webkit-mask-image: $mastodon;
             mask-image: $mastodon;
           }
+
           &.social-icon-bluesky {
             -webkit-mask-image: $bluesky;
             mask-image: $bluesky;
           }
+
           &.social-icon-youtube {
             -webkit-mask-image: $youtube;
             mask-image: $youtube;
@@ -1357,18 +1362,19 @@ a {
   overflow: hidden;
   margin-bottom: 2rem;
   border-radius: 8px;
-  aspect-ratio: 1/1;
   background-color: #f4e2c1;
+  transition: height 0.5s ease-in-out; // Sanfter Übergang der Höhe
 
   .solawi-slide {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: auto;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 1.8s ease-in-out;
+    transition: opacity 1.2s ease-in-out;
+
     /* Aktiver Slide wird sichtbar und nach vorne geholt */
     &.active {
       opacity: 1;
@@ -1377,22 +1383,22 @@ a {
     }
   }
 
-  /* Neuer Wrapper, der Flexbox für die Zentrierung nutzt (ersetzt object-fit) */
+  /* Wrapper für das Bild */
   .solawi-slide-img-wrapper {
     width: 100%;
-    height: 100%;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
 
     img {
       max-width: 100%;
-      max-height: 100%;
-      width: auto;
       height: auto;
-      border-radius: 8px; /* Der Radius wird jetzt direkt auf das Bild angewendet */
+      display: block;
+      border-radius: 8px;
     }
   }
+
   /* Navigation Buttons */
 
   /* Next & previous buttons */
@@ -1400,14 +1406,15 @@ a {
   .solawi-slider-next {
     cursor: pointer;
     position: absolute;
-    top: 50%;
+    top: calc(var(--min-height, 100%) / 2);
+    /* Zentriert basierend auf dem kleinsten Bild */
+    transform: translateY(-50%);
     width: auto;
     padding: 10px;
     color: $white;
     font-weight: bold;
     font-size: 18px;
-    transition: 0.6s ease;
-    transform: translateY(-50%);
+    transition: 0.6s ease, top 0.3s ease;
     border-radius: 8px;
     user-select: none;
     background-color: rgba(0, 0, 0, 0.2);
@@ -1472,17 +1479,20 @@ a {
     position: absolute;
     top: 0;
   }
-} 
+}
 
 /* --- Single Solawi Page --- */
 body.single-solawi {
+
   /* The --solawi-color variable is injected here via PHP */
   .solawi-post-titel {
+
     // Color the main post title (h1)
     h1,
     h1.entry-title {
       color: var(--solawi-color, #{$heading});
     }
+
     .et_pb_image_wrap {
       display: flex;
       justify-content: center;
